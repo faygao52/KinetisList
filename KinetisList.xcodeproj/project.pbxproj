@@ -1,0 +1,422 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AAD430041A7094F1009EFE61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD430031A7094F1009EFE61 /* AppDelegate.swift */; };
+		AAD430061A7094F1009EFE61 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD430051A7094F1009EFE61 /* ViewController.swift */; };
+		AAD430091A7094F1009EFE61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAD430071A7094F1009EFE61 /* Main.storyboard */; };
+		AAD4300B1A7094F1009EFE61 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAD4300A1A7094F1009EFE61 /* Images.xcassets */; };
+		AAD4300E1A7094F1009EFE61 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAD4300C1A7094F1009EFE61 /* LaunchScreen.xib */; };
+		AAD4301A1A7094F1009EFE61 /* KinetisListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD430191A7094F1009EFE61 /* KinetisListTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AAD430141A7094F1009EFE61 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AAD42FF61A7094F1009EFE61 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AAD42FFD1A7094F1009EFE61;
+			remoteInfo = KinetisList;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AAD42FFE1A7094F1009EFE61 /* KinetisList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KinetisList.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAD430021A7094F1009EFE61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AAD430031A7094F1009EFE61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AAD430051A7094F1009EFE61 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AAD430081A7094F1009EFE61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AAD4300A1A7094F1009EFE61 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		AAD4300D1A7094F1009EFE61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		AAD430131A7094F1009EFE61 /* KinetisListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KinetisListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAD430181A7094F1009EFE61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AAD430191A7094F1009EFE61 /* KinetisListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinetisListTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AAD42FFB1A7094F1009EFE61 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AAD430101A7094F1009EFE61 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AAD42FF51A7094F1009EFE61 = {
+			isa = PBXGroup;
+			children = (
+				AAD430001A7094F1009EFE61 /* KinetisList */,
+				AAD430161A7094F1009EFE61 /* KinetisListTests */,
+				AAD42FFF1A7094F1009EFE61 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AAD42FFF1A7094F1009EFE61 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AAD42FFE1A7094F1009EFE61 /* KinetisList.app */,
+				AAD430131A7094F1009EFE61 /* KinetisListTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AAD430001A7094F1009EFE61 /* KinetisList */ = {
+			isa = PBXGroup;
+			children = (
+				AAD430031A7094F1009EFE61 /* AppDelegate.swift */,
+				AAD430051A7094F1009EFE61 /* ViewController.swift */,
+				AAD430071A7094F1009EFE61 /* Main.storyboard */,
+				AAD4300A1A7094F1009EFE61 /* Images.xcassets */,
+				AAD4300C1A7094F1009EFE61 /* LaunchScreen.xib */,
+				AAD430011A7094F1009EFE61 /* Supporting Files */,
+			);
+			path = KinetisList;
+			sourceTree = "<group>";
+		};
+		AAD430011A7094F1009EFE61 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AAD430021A7094F1009EFE61 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AAD430161A7094F1009EFE61 /* KinetisListTests */ = {
+			isa = PBXGroup;
+			children = (
+				AAD430191A7094F1009EFE61 /* KinetisListTests.swift */,
+				AAD430171A7094F1009EFE61 /* Supporting Files */,
+			);
+			path = KinetisListTests;
+			sourceTree = "<group>";
+		};
+		AAD430171A7094F1009EFE61 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AAD430181A7094F1009EFE61 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AAD42FFD1A7094F1009EFE61 /* KinetisList */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AAD4301D1A7094F1009EFE61 /* Build configuration list for PBXNativeTarget "KinetisList" */;
+			buildPhases = (
+				AAD42FFA1A7094F1009EFE61 /* Sources */,
+				AAD42FFB1A7094F1009EFE61 /* Frameworks */,
+				AAD42FFC1A7094F1009EFE61 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KinetisList;
+			productName = KinetisList;
+			productReference = AAD42FFE1A7094F1009EFE61 /* KinetisList.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AAD430121A7094F1009EFE61 /* KinetisListTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AAD430201A7094F1009EFE61 /* Build configuration list for PBXNativeTarget "KinetisListTests" */;
+			buildPhases = (
+				AAD4300F1A7094F1009EFE61 /* Sources */,
+				AAD430101A7094F1009EFE61 /* Frameworks */,
+				AAD430111A7094F1009EFE61 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AAD430151A7094F1009EFE61 /* PBXTargetDependency */,
+			);
+			name = KinetisListTests;
+			productName = KinetisListTests;
+			productReference = AAD430131A7094F1009EFE61 /* KinetisListTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AAD42FF61A7094F1009EFE61 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = FSL;
+				TargetAttributes = {
+					AAD42FFD1A7094F1009EFE61 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					AAD430121A7094F1009EFE61 = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = AAD42FFD1A7094F1009EFE61;
+					};
+				};
+			};
+			buildConfigurationList = AAD42FF91A7094F1009EFE61 /* Build configuration list for PBXProject "KinetisList" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AAD42FF51A7094F1009EFE61;
+			productRefGroup = AAD42FFF1A7094F1009EFE61 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AAD42FFD1A7094F1009EFE61 /* KinetisList */,
+				AAD430121A7094F1009EFE61 /* KinetisListTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AAD42FFC1A7094F1009EFE61 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAD430091A7094F1009EFE61 /* Main.storyboard in Resources */,
+				AAD4300E1A7094F1009EFE61 /* LaunchScreen.xib in Resources */,
+				AAD4300B1A7094F1009EFE61 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AAD430111A7094F1009EFE61 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AAD42FFA1A7094F1009EFE61 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAD430061A7094F1009EFE61 /* ViewController.swift in Sources */,
+				AAD430041A7094F1009EFE61 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AAD4300F1A7094F1009EFE61 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAD4301A1A7094F1009EFE61 /* KinetisListTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AAD430151A7094F1009EFE61 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AAD42FFD1A7094F1009EFE61 /* KinetisList */;
+			targetProxy = AAD430141A7094F1009EFE61 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AAD430071A7094F1009EFE61 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AAD430081A7094F1009EFE61 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		AAD4300C1A7094F1009EFE61 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AAD4300D1A7094F1009EFE61 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AAD4301B1A7094F1009EFE61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		AAD4301C1A7094F1009EFE61 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AAD4301E1A7094F1009EFE61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = KinetisList/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		AAD4301F1A7094F1009EFE61 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = KinetisList/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		AAD430211A7094F1009EFE61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = KinetisListTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KinetisList.app/KinetisList";
+			};
+			name = Debug;
+		};
+		AAD430221A7094F1009EFE61 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = KinetisListTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KinetisList.app/KinetisList";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AAD42FF91A7094F1009EFE61 /* Build configuration list for PBXProject "KinetisList" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAD4301B1A7094F1009EFE61 /* Debug */,
+				AAD4301C1A7094F1009EFE61 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AAD4301D1A7094F1009EFE61 /* Build configuration list for PBXNativeTarget "KinetisList" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAD4301E1A7094F1009EFE61 /* Debug */,
+				AAD4301F1A7094F1009EFE61 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		AAD430201A7094F1009EFE61 /* Build configuration list for PBXNativeTarget "KinetisListTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAD430211A7094F1009EFE61 /* Debug */,
+				AAD430221A7094F1009EFE61 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AAD42FF61A7094F1009EFE61 /* Project object */;
+}
