@@ -109,6 +109,56 @@ public class DataBaseManager{
     }
     
     func fillTable_Column(){
+        db.execute("CREATE TABLE " + DBdefine.Column().TABLE_NAME + " ("
+            + DBdefine.Column()._ID + " INTEGER PRIMARY KEY,"
+            + DBdefine.Column().COLUMN_NAME_NAME + " TEXT,"
+            + DBdefine.Column().COLUMN_NAME_TYPE + " TEXT,"
+            + DBdefine.Column().COLUMN_NAME_TEXT + " TEXT,"
+            + DBdefine.Column().COLUMN_NAME_VALUE + " INTEGER,"
+            + DBdefine.Column().COLUMN_NAME_SHOW + " BOOLEAN"
+            + ");")
+        
+        var numColumn = xmlHeader.count
+        for var iColumn = 2; iColumn < numColumn; ++iColumn {	// skip the "Family" and "Part"
+            let xHeader:DBdefine.HeaderItem = xmlHeader[iColumn]
+            
+            // Look for all available values in the column
+            var select = Expression<String>("`"+xHeader.Name+"`");
+            let query = Device_table.select(select).order(select.asc)
+            for cursor in query{
+                var text:String
+                var value:Int
+                // check the value of DBdefine.Header.COLUMN_NAME_TYPE
+                if(xHeader.Type == ("STRING")){
+                    text = cursor[select]
+                    value = 0
+                }else{
+                    text = cursor[select]
+                    value = cursor[select].toInt()!
+                }
+                
+                if let insertID = Column_table.insert(Column_Name <- xHeader.Name, Column_Type <- xHeader.Type, Column_Text <- text, Column_Value <- value, Header_Visible <- true)
+                    {
+                        println("inserted ID: \(insertID)")
+                    }
+            }
+        }
+    }
+    
+    public func getListData(family:String,var hList:Array<DBdefine.HeaderItem>, var dList:Array<DBdefine.DeviceRow>){
+        if(!hList.isEmpty){
+            hList = Array<DBdefine.HeaderItem>()
+            dList = Array<DBdefine.DeviceRow>()
+        }
+        readHeaderList(hList,All: false)
+        readDeviceList(family,HeaderList: hList,devList: dList)
+    }
+    
+    func readHeaderList(var HeaderList:Array<DBdefine.HeaderItem> ,All: Bool){
+        
+    }
+    
+    func readDeviceList(let family:String, let HeaderList:Array<DBdefine.HeaderItem>, var devList:Array<DBdefine.DeviceRow>){
         
     }
 }
