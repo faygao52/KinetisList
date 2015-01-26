@@ -17,6 +17,7 @@ let Header_table = db[DBdefine.Header().TABLE_NAME]
 let Device_table = db[DBdefine.Devices().TABLE_NAME]
 let Column_table = db[DBdefine.Column().TABLE_NAME]
 //statement for header table
+let Header_ID = Expression<Int>(DBdefine.Header()._ID)
 let Header_Name = Expression<String>(DBdefine.Header().COLUMN_NAME_NAME)
 let Header_Title = Expression<String>(DBdefine.Header().COLUMN_NAME_TITLE)
 let Header_Type = Expression<String>(DBdefine.Header().COLUMN_NAME_TYPE)
@@ -41,7 +42,7 @@ public class DataBaseManager{
             db.drop(table: Device_table)
             db.drop(table: Column_table)
             
-            let PXR = ParseXmlResource(xmlFile: "\(path)/test.xml")
+            let PXR = ParseXmlResource(xmlfiles: "\(path)/test.xml","")
             PXR.getData(xmlHeader, xmlDevice: xmlDevice)
             fillTable_Header()
             fillTable_Devices()
@@ -88,7 +89,8 @@ public class DataBaseManager{
         var numDev = xmlDevice.count
         for var iDev = 0; iDev < numDev; ++iDev {
             let xDev:[String] = xmlDevice[iDev];
-            for var iColumn = 0; iColumn < numColumn; ++iColumn {
+            var iColumn = 0
+            for iColumn = 0; iColumn < numColumn; ++iColumn {
                 let xHeader:DBdefine.HeaderItem = xmlHeader[iColumn]
                 columnList += "`"+xHeader.Name+"`, "
                 if xHeader.Type == ("INTEGER") {
@@ -101,8 +103,9 @@ public class DataBaseManager{
                     valueList += "`" + xDev[iColumn] + "`, "
                 }
             }
-            columnList = columnList.substringToIndex(advance(columnList.endIndex,-2))
-            valueList = valueList.substringToIndex(advance(valueList.endIndex,-2))
+            columnList += "`SourceID`"
+            valueList += "`"+xDev[iColumn]+"`"
+
             db.execute("INSERT INTO " + DBdefine.Devices().TABLE_NAME + "( " + columnList + " ) VALUES ( " + valueList + " );")
         }
         
@@ -155,7 +158,21 @@ public class DataBaseManager{
     }
     
     func readHeaderList(var HeaderList:Array<DBdefine.HeaderItem> ,All: Bool){
-        
+        var results: Query
+        if(All){
+            results = Header_table.select(Header_Name,Header_Title,Header_Type,Header_Width,Header_Visible).order(Header_ID)
+        }else{
+            results = Header_table.select(Header_Name,Header_Title,Header_Type,Header_Width,Header_Visible).filter(Header_Visible).order(Header_ID)
+        }
+        for result in results{
+            var headerItem =  DBdefine.HeaderItem()
+            headerItem.Name = result[Header_Name]
+            headerItem.Title = result[Header_Title]
+            headerItem.Type = result[Header_Type]
+            headerItem.width = result[Header_Width]
+            headerItem.Visible = result[Header_Visible]
+            HeaderList.append(headerItem)
+        }
     }
     
     func readDeviceList(let family:String, let HeaderList:Array<DBdefine.HeaderItem>, var devList:Array<DBdefine.DeviceRow>){

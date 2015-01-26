@@ -29,44 +29,54 @@ public class ParseXmlResource{
     var xDeviceRow:[String] = []
     var familyName:String?
 
-    var xml:XMLIndexer
-    init(xmlFile:String){
-        xml = SWXMLHash.parse(xmlFile)
+    var xmls:[XMLIndexer] = []
+    var sourceName:[String] = ["Hot parts", "Conditional parts", "Legacy parts"]
+    init(xmlfiles:String...){
+        for xmlfile in xmlfiles{
+            self.xmls.append(SWXMLHash.parse(xmlfile))
+        }
     }
     
     func getData(var xmlHeader:Array<DBdefine.HeaderItem>, var xmlDevice:[[String]]){
         //parse header
-        for head in xml[FEATURES][HEADER][ITEM]{
-            //var Header_Name = head[ITEM].element!.attributes["Width"]!
-            var xHeader = DBdefine.HeaderItem()
-            xHeader.Name  = head.element!.attributes[HEADER_NAME]!
-            xHeader.Title = head.element!.attributes[ATTR_Data]!
-            xHeader.Type = head.element!.attributes[HEADER_TYPE]!
-            xHeader.width = head.element!.attributes[HEADER_WIDTH]!.toInt()!
-            if((head.element!.attributes[HEADER_SHOW]) != nil && head.element!.attributes[HEADER_SHOW] == "false"){
-                xHeader.Visible = false
-            }
-            HeaderMap[xHeader.Name] = itemIndex
-            xmlHeader.append(xHeader)
-            itemIndex++
-        }
-        //parse devices
-        for family in xml[FEATURES][FAMILY]{
-            familyName = family.element!.attributes[ATTR_Name]
-            for devices in family[DEVICE]{
-                var column:Int? = HeaderMap["SubFamily"]
-                if((column) != nil){
-                    xDeviceRow[column!] = familyName!
+        var i:Int = 0;
+        for xml in xmls{
+            for head in xml[FEATURES][HEADER][ITEM]{
+                //var Header_Name = head[ITEM].element!.attributes["Width"]!
+                var xHeader = DBdefine.HeaderItem()
+                xHeader.Name  = head.element!.attributes[HEADER_NAME]!
+                xHeader.Title = head.element!.attributes[ATTR_Data]!
+                xHeader.Type = head.element!.attributes[HEADER_TYPE]!
+                xHeader.width = head.element!.attributes[HEADER_WIDTH]!.toInt()!
+                if((head.element!.attributes[HEADER_SHOW]) != nil && head.element!.attributes[HEADER_SHOW] == "false"){
+                    xHeader.Visible = false
                 }
-                for items in devices[ITEM]{
-                    var itemName:String = items.element!.attributes[ATTR_Name]!
-                    column = HeaderMap[itemName]
+                HeaderMap[xHeader.Name] = itemIndex
+                xmlHeader.append(xHeader)
+                itemIndex++
+            }
+            //parse devices
+            for family in xml[FEATURES][FAMILY]{
+                familyName = family.element!.attributes[ATTR_Name]
+                for devices in family[DEVICE]{
+                    var column:Int? = HeaderMap["SubFamily"]
                     if((column) != nil){
-                        xDeviceRow[column!] = items.element!.attributes[ATTR_Data]!
+                        xDeviceRow[column!] = familyName!
                     }
+                    for items in devices[ITEM]{
+                        var itemName:String = items.element!.attributes[ATTR_Name]!
+                        column = HeaderMap[itemName]
+                        if((column) != nil){
+                            xDeviceRow[column!] = items.element!.attributes[ATTR_Data]!
+                        }
+                    }
+                    xDeviceRow[xDeviceRow.count] = sourceName[i]
+                    xmlDevice.append(xDeviceRow)
                 }
-                xmlDevice.append(xDeviceRow)
             }
         }
+        i++
     }
+    
+    
 }
