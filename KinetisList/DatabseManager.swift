@@ -25,6 +25,7 @@ let Header_Width = Expression<Int>(DBdefine.Header().COLUMN_NAME_WIDTH)
 let Header_Visible = Expression<Bool>(DBdefine.Header().COLUMN_NAME_SHOW)
 
 //statement for coloumn table
+let Column_ID = Expression<Int>(DBdefine.Column()._ID)
 let Column_Name = Expression<String>(DBdefine.Column().COLUMN_NAME_NAME)
 let Column_Type = Expression<String>(DBdefine.Column().COLUMN_NAME_TYPE)
 let Column_Text = Expression<String>(DBdefine.Column().COLUMN_NAME_TEXT)
@@ -164,18 +165,62 @@ public class DataBaseManager{
         }else{
             results = Header_table.select(Header_Name,Header_Title,Header_Type,Header_Width,Header_Visible).filter(Header_Visible).order(Header_ID)
         }
-        for result in results{
-            var headerItem =  DBdefine.HeaderItem()
-            headerItem.Name = result[Header_Name]
-            headerItem.Title = result[Header_Title]
-            headerItem.Type = result[Header_Type]
-            headerItem.width = result[Header_Width]
-            headerItem.Visible = result[Header_Visible]
-            HeaderList.append(headerItem)
+        if(results.count != 0){
+            for result in results{
+                var headerItem =  DBdefine.HeaderItem()
+                headerItem.Name = result[Header_Name]
+                headerItem.Title = result[Header_Title]
+                headerItem.Type = result[Header_Type]
+                headerItem.width = result[Header_Width]
+                headerItem.Visible = result[Header_Visible]
+                HeaderList.append(headerItem)
+            }
         }
     }
     
     func readDeviceList(let family:String, let HeaderList:Array<DBdefine.HeaderItem>, var devList:Array<DBdefine.DeviceRow>){
+        var results:Query
+        results = Column_table.select(Column_Name,Column_Type,Column_Text,Column_Value).filter(Column_Visible).order(Column_ID)
+        var filterType = ""
+        var selections:String = ""
+        if(family != "*"){
+            selections += "SubFamily = "+family
+        }
+        if(results.count != 0){
+            for result in results{
+                if(!selections.isEmpty){selections += " AND "}
+                selections += "`"+result[Column_Name]+"` <>"
+                filterType = result[Column_Type]
+                if(filterType == "INTEGER"){selections += String(result[Column_Value])}
+                else{ selections += result[Column_Text]}
+            }
+        }
+        var projection:String = ""
+        var iCol = 0
+        for(iCol; iCol < HeaderList.count; ++iCol){
+            projection += "`"+HeaderList[iCol].Name+"`, "
+        }
+        projection += "`SourceID`"
+        let seleExpression = Expression<Bool?>(selections)
+        let orderExpreesion = Expression<String>(DBdefine.Devices().DEFAULT_SORT_ORDER)
+        let stmt = Device_table.filter(seleExpression).order(orderExpreesion)
         
+        //let stmt = db.run("SELECT "+projection+" FROM "+DBdefine.Devices().TABLE_NAME+" WHERE ("+selections+") ORDER BY "+DBdefine.Devices().DEFAULT_SORT_ORDER)
+        for row in stmt{
+            var device = DBdefine.DeviceRow()
+            for(var iParam = 0; iParam < HeaderList.count; ++iParam){
+                if(HeaderList[iParam].Type == "INTEGER"){
+                    let expression = Expression<Int>(HeaderList[iParam].Name)
+                    device.Param[iParam] = String(row.get(expression))
+                }else{
+                    let expression = Expression<String>(HeaderList[iParam].Name)
+                    device.Param[iParam] = row.get(expression)
+                }
+            }
+            devList.append(device)
+        }
+    }
+    
+    func getSource(){
     }
 }

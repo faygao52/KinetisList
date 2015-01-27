@@ -19,8 +19,8 @@ public final class DBdefine{
     }
 
     public struct DeviceRow{
-        static var Param: [String] = []
-        static var Visible:Bool? = true
+        var Param: [String] = []
+        var Visible:Bool? = true
     }
 
     public struct ColumnValue{
@@ -60,7 +60,7 @@ public final class DBdefine{
     
     public final class Devices:BaseColumns{
         let TABLE_NAME:String = "Devices"
-        let DEFAULT_SORT_ORDER = "`MK Part Number` ASC"
+        let DEFAULT_SORT_ORDER = "`MK Part Number`"
     }
     
 }

@@ -522,6 +522,7 @@
 				AAD4301F1A7094F1009EFE61 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AAD430201A7094F1009EFE61 /* Build configuration list for PBXNativeTarget "KinetisListTests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +531,7 @@
 				AAD430221A7094F1009EFE61 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
