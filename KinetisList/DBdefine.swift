@@ -24,9 +24,9 @@ public final class DBdefine{
     }
 
     public struct ColumnValue{
-        static var Text:String? = ""
-        static var Value:Int? = 0
-        static var Visible:Bool? = true
+        var Text:String? = ""
+        var Value:Int? = 0
+        var Visible:Bool? = true
     }
 
     public struct ColumnFilter{
