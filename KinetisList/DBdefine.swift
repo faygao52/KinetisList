@@ -19,19 +19,22 @@ public final class DBdefine{
     }
 
     public struct DeviceRow{
-        var Param: [String] = []
-        var Visible:Bool? = true
+        var Param = [String]()
+        var Visible:Bool = true
+        init(columns:Int){
+            Param = [String](count: columns, repeatedValue: "")
+        }
     }
 
     public struct ColumnValue{
-        var Text:String? = ""
-        var Value:Int? = 0
-        var Visible:Bool? = true
+        var Text:String = ""
+        var Value:Int = 0
+        var Visible:Bool = true
     }
 
     public struct ColumnFilter{
-        static var Column:String?
-        static var Visible:Bool?
+        var Column:String = ""
+        var Visible:Bool = true
     }
     public class BaseColumns{
         let _ID:String = "_id"

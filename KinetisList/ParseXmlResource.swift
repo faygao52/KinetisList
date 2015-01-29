@@ -26,10 +26,10 @@ public class ParseXmlResource{
     var NumColumns:Int = 0
     var HeaderMap = Dictionary<String,Int>()
     
-    var xDeviceRow:[String] = []
+    var xDeviceRow:[String] = [String]()
     var familyName:String?
 
-    var xmls:[XMLIndexer] = []
+    var xmls:[XMLIndexer] = [XMLIndexer]()
     var sourceName:[String] = ["Hot parts", "Conditional parts", "Legacy parts"]
     init(xmlfiles:String...){
         for xmlfile in xmlfiles{
@@ -37,7 +37,7 @@ public class ParseXmlResource{
         }
     }
     
-    func getData(var xmlHeader:Array<DBdefine.HeaderItem>, var xmlDevice:[[String]]){
+    func getData(inout xmlHeader:Array<DBdefine.HeaderItem>, inout xmlDevice:[[String]]){
         //parse header
         var i:Int = 0;
         for xml in xmls{
@@ -56,6 +56,7 @@ public class ParseXmlResource{
                 itemIndex++
             }
             //parse devices
+            xDeviceRow = [String](count: xmlHeader.count, repeatedValue: (""))
             for family in xml[FEATURES][FAMILY]{
                 familyName = family.element!.attributes[ATTR_Name]
                 for devices in family[DEVICE]{

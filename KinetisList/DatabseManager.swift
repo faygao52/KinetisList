@@ -44,7 +44,7 @@ public class DataBaseManager{
             db.drop(table: Column_table)
             
             let PXR = ParseXmlResource(xmlfiles: "\(path)/test.xml","")
-            PXR.getData(xmlHeader, xmlDevice: xmlDevice)
+            PXR.getData(&xmlHeader, xmlDevice: &xmlDevice)
             fillTable_Header()
             fillTable_Devices()
             fillTable_Column()
@@ -152,17 +152,17 @@ public class DataBaseManager{
         }
     }
     
-    public func getListData(family:String,var hList:Array<DBdefine.HeaderItem>, var dList:Array<DBdefine.DeviceRow>){
+    public func getListData(family:String,inout hList:Array<DBdefine.HeaderItem>, inout dList:Array<DBdefine.DeviceRow>){
         if(!hList.isEmpty){
             hList = Array<DBdefine.HeaderItem>()
             dList = Array<DBdefine.DeviceRow>()
         }
-        readHeaderList(hList,All: false)
-        readDeviceList(family,HeaderList: hList,devList: dList)
+        readHeaderList(&hList,All: false)
+        readDeviceList(family,HeaderList: hList,devList: &dList)
     }
     
     //return data from Header table
-    public func readHeaderList(var HeaderList:Array<DBdefine.HeaderItem> ,All: Bool){
+    public func readHeaderList(inout HeaderList:Array<DBdefine.HeaderItem> ,All: Bool){
         var results: Query
         if(All){
             results = Header_table.select(Header_Name,Header_Title,Header_Type,Header_Width,Header_Visible).order(Header_ID)
@@ -183,7 +183,7 @@ public class DataBaseManager{
     }
     
     //return data from devices table , with visible column and value
-    private func readDeviceList(let family:String, let HeaderList:Array<DBdefine.HeaderItem>, var devList:Array<DBdefine.DeviceRow>){
+    private func readDeviceList(let family:String, let HeaderList:Array<DBdefine.HeaderItem>, inout devList:Array<DBdefine.DeviceRow>){
         var results:Query
         results = Column_table.select(Column_Name,Column_Type,Column_Text,Column_Value).filter(Column_Visible).order(Column_ID)
         var filterType = ""
@@ -214,7 +214,7 @@ public class DataBaseManager{
         
         let test = db.run("SELECT "+projection+" FROM "+DBdefine.Devices().TABLE_NAME+" WHERE ("+selections+") ORDER BY "+DBdefine.Devices().DEFAULT_SORT_ORDER)
         for row in stmt{
-            var device = DBdefine.DeviceRow()
+            var device = DBdefine.DeviceRow(columns:HeaderList.count)
             for(var iParam = 0; iParam < HeaderList.count; ++iParam){
                 if(HeaderList[iParam].Type == "INTEGER"){
                     let expression = Expression<Int>(HeaderList[iParam].Name)
@@ -229,7 +229,7 @@ public class DataBaseManager{
     }
     
     //get source list
-    public func getSource(var sourceList:Array<String>, var cntList:Array<Int>){
+    public func getSource(inout sourceList:Array<String>, inout cntList:Array<Int>){
         let SourceExp = Expression<String>("SourceID")
         let countExp = Expression<Int>("COUNT(*)")
         let query = Device_table.select(SourceExp,countExp).group(SourceExp).order(countExp.desc)
@@ -245,7 +245,7 @@ public class DataBaseManager{
         cntList.append(total)
     }
     
-    public func getFamily(let SourceID:String, var familyList:Array<String>, var cntList:Array<Int>){
+    public func getFamily(let SourceID:String, inout familyList:Array<String>, inout cntList:Array<Int>){
         let SourceExp = Expression<String>("SourceID")
         //let countExp = Expression<Int>("COUNT(*)")
         let FamilyExp = Expression<String>("SubFamily")
@@ -298,34 +298,79 @@ public class DataBaseManager{
         let statement = db.run(SQL)
         for row in statement{
             cv  = DBdefine.ColumnValue()
-            cv.Text = row[0] as? String
-            cv.Value = row[1] as? Int
-            cv.Visible = row[3] as? Bool
+            cv.Text = row[0] as String!
+            cv.Value = row[1] as Int!
+            cv.Visible = row[3] as Bool!
             cnArray.append(cv)
         }
         return cnArray
     }
-    public func setColumnValues(cvArray:Array<DBdefine.ColumnValue>, selColumn:String){
-        setColumnValues(cvArray,selColumn: selColumn, showState: false)
-        setColumnValues(cvArray, selColumn: selColumn, showState: true)
+    public func setColumnValues(inout cvArray:Array<DBdefine.ColumnValue>, selColumn:String){
+        setColumnValues(&cvArray,selColumn: selColumn, showState: false)
+        setColumnValues(&cvArray, selColumn: selColumn, showState: true)
     }
-    private func setColumnValues(cvArray:Array<DBdefine.ColumnValue>, selColumn:String, showState:Bool){
+    private func setColumnValues(inout cvArray:Array<DBdefine.ColumnValue>, selColumn:String, showState:Bool){
         let cursor = Column_table.select(distinct: Column_Type).filter(Column_Name == selColumn)
         let columnIsValue:Bool = (cursor.first?.get(Column_Type) == "INTEGER")
         var strParam:String = ""
         for cv in cvArray {
-            if(cv.Text == nil){continue}
+            if(cv.Text == ""){continue}
             if(cv.Visible == showState){
                 if(strParam != ""){strParam += " OR "}
-                if(columnIsValue){ strParam += DBdefine.Column().COLUMN_NAME_VALUE + " = " + String(cv.Value!)
-                }else{strParam += DBdefine.Column().COLUMN_NAME_TEXT + " = " + cv.Text!}
-             }
+                if(columnIsValue){ strParam += DBdefine.Column().COLUMN_NAME_VALUE + " = " + String(cv.Value)
+                }else{strParam += DBdefine.Column().COLUMN_NAME_TEXT + " = " + cv.Text }
+            }
         }
         if(strParam != ""){
             let ParamExp = Expression<Bool?>(strParam)
             let column = Column_table.filter(Column_Name == selColumn && ParamExp)
             column.update(Column_Visible <- showState)?
+            var value:Int
+            if(showState == false){ value = 0 }else{ value = 1 }
+            //let SQL = "UPDATE " + DBdefine.Column().TABLE_NAME + " SET `" + DBdefine.Column().COLUMN_NAME_SHOW + "` = `" + value +"` WHERE " + strParam
+            //db.run(SQL)
         }
     }
-
+    
+    func getColumnFilters(inout filterList:Array<DBdefine.ColumnFilter>){
+        let query = Column_table.select(distinct: Column_Name,Column_Visible).order(Column_ID)
+        var columnFilter:DBdefine.ColumnFilter
+        var lastFilter = DBdefine.ColumnFilter()
+        var iclf:Int = 0
+        for row in query{
+            columnFilter = DBdefine.ColumnFilter()
+            columnFilter.Column = row.get(Column_Name)
+            columnFilter.Visible = row.get(Column_Visible)
+            if(columnFilter.Column == lastFilter.Column){
+                if(lastFilter.Visible == true){ filterList[iclf-1] = columnFilter }
+                continue
+            }
+            filterList.append(columnFilter)
+            lastFilter.Column = columnFilter.Column
+            lastFilter.Visible = columnFilter.Visible
+        }
+    }
+    
+    func clearColumnFilters(theColumn:String){
+        if(Column_table.select(Column_Name == theColumn).update(Column_Visible <- true))>0{
+            println(" clear succeed")
+        }
+    }
+    
+    func updateColumnVisibility(let hvList:Array<DBdefine.HeaderItem>){
+        //change all columns to be visible
+        Header_table.update(Header_Visible <- true)?
+        
+        var whereStr:String = ""
+        for hItem in hvList{
+            if(!hItem.Visible){
+                if(whereStr != ""){whereStr += " OR "}
+                whereStr += DBdefine.Header().COLUMN_NAME_NAME + " = " + hItem.Name
+            }
+        }
+        if(whereStr != ""){
+            let SQL = "UPDATE " + DBdefine.Header().TABLE_NAME+" SET `" + DBdefine.Header().COLUMN_NAME_SHOW + "` = `0` WHERE " + whereStr
+            db.run(SQL)
+        }
+    }
 }
